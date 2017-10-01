@@ -12,69 +12,30 @@
 
 #include "wolf.h"
 
-int world_map[24][24] = {
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
-int		*convert_to_int(char **s, int w)
-{
-	int *map;
-	int i;
-
-	i = 0;
-	map = (int *)malloc(sizeof(int) * (w + 1));
-	while (i < w)
-	{
-		map[i] = ft_atoi(&s[i][0]);
-		i++;
-	}
-	return (map);
-}
-
 int	main(int ac, char **av)
 {
 	void	*mlx;
 	t_env	*env;
-	t_map	*map;
 	int		fd;
 
 	if (ac != 2)
 		ft_error("Usage: ./wolf3d maps/<map name>");
-	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))))
-		ft_error("Error: Failed to allocate memory for map.");
+	if (!(env = (t_env*)ft_memalloc(sizeof(t_env))))
+		ft_error("Error: Failed to allocate memory line 23 main.c");
+	if (!(env->map = (t_map*)ft_memalloc(sizeof(t_map))))
+		ft_error("Error: Failed to allocate memory line 25 main.c");
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		ft_error("Error: Failed to open map. Check name and try again.");
-	get_map_width(map, fd);
-	get_map_height(map, fd);
+	get_map_width(env, fd);
+	get_map_height(env, fd);
 	if ((fd = open(av[1], O_RDONLY)) < 0)
-		ft_error("Error: Opening file failed.");
+		ft_error("Error: Reopening of map failed.");
+	store_map(env, fd);
 	mlx = mlx_init();
-	env = make_environment(mlx);
-	store_map(map, fd);
+	make_environment(mlx, env);
 	create_image(env);
 	env->win = mlx_new_window(mlx, env->width, env->height, "Wolf 3D");
+	set_hooks(env);
 	mlx_loop_hook(mlx, loop_hook, env);
 	mlx_loop(mlx);
 }

@@ -8,7 +8,7 @@ SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_putnbr.c f
 	  ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putendl.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 	  ft_putnbr_fd.c ft_striteri.c ft_strmap.c ft_strmapi.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	  ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_memdel.c ft_strrev.c ft_itoa_base.c ft_countdigits.c \
-	  ft_isupper.c ft_islower.c get_next_line.c ft_error.c
+	  ft_isupper.c ft_islower.c get_next_line.c ft_error.c ft_atoi_2d.c
 
 HDR = libft.h
 

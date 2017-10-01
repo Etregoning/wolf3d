@@ -6,7 +6,7 @@
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 14:21:37 by etregoni          #+#    #+#             */
-/*   Updated: 2017/03/10 01:18:56 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/09/30 18:12:57 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int				ft_islower(int c);
 int				ft_isupper(int c);
 void			ft_error(char *str);
 int				get_next_line(const int fd, char **line);
+int				*ft_atoi_2d(char **s, int w);
 
 #endif

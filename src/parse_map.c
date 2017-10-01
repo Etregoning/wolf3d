@@ -50,64 +50,63 @@ int	count_width(char *map_coord)
 	return (j);
 }
 
-void	get_map_width(t_map *map, int fd)
+void	get_map_width(t_env *env, int fd)
 {
 	int		width;
 	char	**points;
 
-	if (get_next_line(fd, &(map->line)))
+	if (get_next_line(fd, &(env->map->line)))
 	{
-		check_line(map->line);
-		width = count_width(map->line);
+		points = ft_strsplit(env->map->line, ' ');
+		check_line(env->map->line);
+		width = count_width(env->map->line);
 		if (width < 2)
 			ft_error("Error: Map is not wide enough.");
 		else
 		{
-			points = ft_strsplit(map->line, ' ');
-			map->width = width;
+			env->map->width = width;
 		}
 	}
 	else
 		ft_error("Error: Empty map");
 }
 
-void	get_map_height(t_map *map, int fd)
+void	get_map_height(t_env *env, int fd)
 {
 	int	width;
 	int	i;
 	char	**points;
 
 	i = 1;
-	while (get_next_line(fd, &(map->line)))
+	while (get_next_line(fd, &(env->map->line)))
 	{
-		check_line(map->line);
-		width = count_width(map->line);
-		if (width != map->width)
+		points = ft_strsplit(env->map->line, ' ');
+		check_line(env->map->line);
+		width = count_width(env->map->line);
+		if (width != env->map->width)
 			ft_error("Error: Width uneven.");
-		else
-			points = ft_strsplit(map->line, ' ');
 		i++;
 	}
-	map->height = i;
-	free(map->line);
+	env->map->height = i;
+	free(env->map->line);
 	free(points);
 	close(fd);
 }
 
-void	store_map(t_map *map, int fd)
+void	store_map(t_env *env, int fd)
 {
 	int		i;
 	char	**points;
 
 	i = 0;
-	map->map_arr = (int **)malloc(sizeof(int *) * (map->height + 1));
-	while (get_next_line(fd, &(map->line)) > 0)
+	env->map->map_arr = (int **)malloc(sizeof(int *) * (env->map->height + 1));
+	while (get_next_line(fd, &(env->map->line)) > 0)
 	{
-		points = ft_strsplit(map->line, ' ');
-		map->map_arr[i] = convert_to_int(points, map->width);
+		points = ft_strsplit(env->map->line, ' ');
+		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
 		i++;
 	}
-	free(map->line);
+	free(env->map->line);
 	free(points);
 	close(fd);
 }

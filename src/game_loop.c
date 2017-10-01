@@ -75,10 +75,8 @@ void	dda_start(t_env *env)
 			env->map_y += env->step_y;
 			env->side_hit = 1;
 		}
-		printf("before map_arr called\n");
 		if (env->map->map_arr[env->map_x][env->map_y] > 0)
 			env->hit = 1;
-		printf("after map_arr called\n");
 	}
 
 }
