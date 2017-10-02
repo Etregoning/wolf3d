@@ -18,6 +18,7 @@ void	redraw(t_env *env)
 	mlx_destroy_image(env->mlx, env->img);
 	create_image(env);
 	game_loop(env);
+	mlx_put_image_to_window(env->mlx, env->win, env->floor, 0, 0);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 }
 

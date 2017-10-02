@@ -65,6 +65,8 @@ typedef struct	s_env
 	void		*mlx;
 	void		*win;
 	void		*img;
+	void  		*floor;
+	char		*floor_addr;
 	char		*img_addr;
 	double		pos_x;
 	double		pos_y;
@@ -81,6 +83,7 @@ typedef struct	s_env
 	double		rot_speed;
 	int			expose;
 	int			x;
+	int			mid_y;
 	int			y;
 	int			map_x;
 	int			map_y;
@@ -127,5 +130,6 @@ void			create_image(t_env *env);
 void			init_thread(t_env *env);
 void			put_pixel_to_img(t_env *env, int x, int y, int color);
 int 			put_line_to_img(t_env *env, int x, int y1, int y2);
+int 			draw_background(t_env *env);
 
 #endif

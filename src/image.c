@@ -25,6 +25,8 @@ void			put_pixel_to_img(t_env *env, int x, int y, int color)
 		env->img_addr[++i] = color >> 8;
 		env->img_addr[++i] = color >> 16;
 	}
+	else
+		env->img_addr[i] = (char)env->floor;
 
 }
 
@@ -50,10 +52,37 @@ int put_line_to_img(t_env *env, int x, int y1, int y2)
   return (0);
 }
 
+
+
+int draw_background(t_env *env)
+{
+	int x;
+	int	y;
+
+	y = -1;
+
+ 	while (y++ < env->height)
+  	{
+		x = -1;
+		while (x++ < env->width)
+		{
+			if (y < env->height / 2)
+	  			put_pixel_to_img(env, x, y, 0xBDBDBD);
+			else
+				put_pixel_to_img(env, x, y, 0x7e7e7e);
+		}
+  	}
+  return (0);
+}
+
 void	create_image(t_env *env)
 {
+	env->mid_y =  env->height / 2;
 	env->img = mlx_new_image(env->mlx, env->width, env->height);
 	env->img_addr = mlx_get_data_addr(env->img,
 					&(env->bits_per_pixel), &(env->size_line), &(env->endian));
-
+	env->floor = mlx_xpm_file_to_image(env->mlx, "./xpm/floor_texture.xpm",
+					&(env->width), &(env->mid_y));
+	env->floor_addr =  mlx_get_data_addr(env->floor, &(env->bits_per_pixel),
+						&(env->size_line), &(env->endian));
 }

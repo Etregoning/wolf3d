@@ -14,13 +14,13 @@
 
 void	move_forward(t_env *env)
 {
+	int	x;
+	int	y;
+
+	x = (int)(env->pos_x + env->dir_x * env->mov_speed);
+	y = (int)(env->pos_y + env->dir_y * env->mov_speed);
 	if(env->key_pressed->up && !env->key_pressed->down)
 	{
-		int	x;
-		int	y;
-
-		x = (int)(env->pos_x + env->dir_x * env->mov_speed);
-		y = (int)(env->pos_y + env->dir_y * env->mov_speed);
 		if (env->map->map_arr[x][y] == 0)
 		{
 			env->pos_x += env->dir_x * env->mov_speed;
@@ -31,10 +31,18 @@ void	move_forward(t_env *env)
 
 void	move_backward(t_env *env)
 {
+	int	x;
+	int	y;
+
+	x = (int)(env->pos_x - env->dir_x * env->mov_speed);
+	y = (int)(env->pos_y - env->dir_y * env->mov_speed);
 	if (env->key_pressed->down && !env->key_pressed->up)
 	{
-		env->pos_x -= env->dir_x * 0.25;
-		env->pos_y -= env->dir_y * 0.25;
+		if(env->map->map_arr[x][y] == 0)
+		{
+			env->pos_x -= env->dir_x * 0.25;
+			env->pos_y -= env->dir_y * 0.25;
+		}
 	}
 }
 
