@@ -52,43 +52,13 @@ int	loop_hook(t_env *env)
 		env->key_pressed->left || env->key_pressed->right)
 		env->expose = 1;
 	if (env->key_pressed->up)
-	{
-		printf("up key\n");
-		env->pos_x += env->dir_x * 0.25;
-		env->pos_y += env->dir_y * 0.25;
-	}
+		move_forward(env);
 	if (env->key_pressed->down)
-	{
-		printf("down key\n");
-		env->pos_x -= env->dir_x * 0.25;
-		env->pos_y -= env->dir_y * 0.25;
-	}
+		move_backward(env);
 	if (env->key_pressed->right)
-	{
-		env->old_dir_x = env->dir_x;
-		env->dir_x = env->dir_x * cos(-(env->rot_speed)) - env->dir_y
-						* sin(-(env->rot_speed));
-      	env->dir_y = env->old_dir_x * sin(-(env->rot_speed)) + env->dir_y
-						* cos(-(env->rot_speed));
-		env->old_plane_x = env->plane_x;
-      	env->plane_x = env->plane_x * cos(-(env->rot_speed)) - env->plane_y
-						* sin(-(env->rot_speed));
-      	env->plane_y = env->old_plane_x * sin(-(env->rot_speed)) + env->plane_y
-						* cos(-(env->rot_speed));
-	}
+		rotate_right(env);
 	if (env->key_pressed->left)
-	{
-		env->old_dir_x = env->dir_x;
-      	env->dir_x = env->dir_x * cos(env->rot_speed) - env->dir_y
-						* sin(env->rot_speed);
-      	env->dir_y = env->old_dir_x * sin(env->rot_speed) + env->dir_y
-						* cos(env->rot_speed);
-      	env->old_plane_x = env->plane_x;
-      	env->plane_x = env->plane_x * cos(env->rot_speed) - env->plane_y
-						* sin(env->rot_speed);
-      	env->plane_y = env->old_plane_x * sin(env->rot_speed) + env->plane_y
-						* cos(env->rot_speed);
-	}
+		rotate_left(env);
 	if (env->expose)
 		redraw(env);
 	return (0);

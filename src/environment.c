@@ -33,6 +33,7 @@ void	environment_init(t_env *env)
 	env->plane_x = 0;
 	env->plane_y = 0.66;
 	env->rot_speed = 0.050;
+	env->mov_speed = 0.25;
 	env->ray->wall_color = 0xFF0000;
 	env->key_pressed->up = 0;
 	env->key_pressed->down = 0;
