@@ -97,33 +97,13 @@ void	calc_fov(t_env *env)
 	if(env->ray->draw_end >= env->height)
 		env->ray->draw_end = env->height - 1;
 }
-/*
-void	game_loop(void *current_thread)
-{
-	t_env		*env;
-	t_thread	*t;
-	int			x;
-
-	x = 0;
-	t = (t_thread*)current_thread;
-	env = t->env;
-	while (x++ < env->width)
-	{
-			calc_ray(env, x);
-			calc_step(env);
-			dda_start(env);
-			calc_fov(env);
-			put_line_to_img(env, t, env->ray->draw_start, env->ray->draw_end);
-	}
-}
-*/
 
 void	game_loop(t_env *env)
 {
 	int x;
 
-	x = 0;
-	while (x++ < env->width)
+	x = -1;
+	while (++x < env->width)
 	{
 			calc_ray(env, x);
 			calc_step(env);

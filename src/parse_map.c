@@ -42,10 +42,10 @@ int	count_width(char *map_coord)
 		{
 			j++;
 			while ((map_coord[i] != ' ') && (map_coord[i] != '\0'))
-				i++;
+				++i;
 		}
 		else
-			i++;
+			++i;
 	}
 	return (j);
 }
@@ -104,6 +104,7 @@ void	store_map(t_env *env, int fd)
 	{
 		points = ft_strsplit(env->map->line, ' ');
 		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
+		free(env->map->line);
 		i++;
 	}
 	free(env->map->line);

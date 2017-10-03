@@ -66,8 +66,10 @@ typedef struct	s_env
 	void		*win;
 	void		*img;
 	void  		*floor;
+	void 		*ceiling;
 	char		*floor_addr;
-	char		*img_addr;
+	char		*ceiling_addr;
+	int			*img_addr;
 	double		pos_x;
 	double		pos_y;
 	double		old_dir_x;
@@ -81,9 +83,9 @@ typedef struct	s_env
 	double		cam_x;
 	double		mov_speed;
 	double		rot_speed;
+	int			img_h;
 	int			expose;
 	int			x;
-	int			mid_y;
 	int			y;
 	int			map_x;
 	int			map_y;

@@ -32,57 +32,36 @@ void			put_pixel_to_img(t_env *env, int x, int y, int color)
 
 int put_line_to_img(t_env *env, int x, int y1, int y2)
 {
-	if(y2 < y1)
-	{
-  		y1 += y2;
-  		y2 = y1 - y2;
-  		y1 -= y2;
-	}
-	if(y2 < 0 || y1 >= env->height  || x < 0 || x >= env->width)
-		return (0);
-	if(y1 < 0)
-		y1 = 0;
-	if(y2 >= env->width)
-		y2 = env->height - 1;
-
- 	while (y1++ <= y2)
-  	{
-	  put_pixel_to_img(env, x, y1, env->ray->wall_color);
-  	}
-  return (0);
-}
-
-
-
-int draw_background(t_env *env)
-{
-	int x;
 	int	y;
 
 	y = -1;
-
- 	while (y++ < env->height)
+	if (y1 < 0)
+		y1 = 0;
+	if (y2 > env->height)
+		y2 = env->height - 1;
+	while (++y <= y1)
+		env->img_addr[x + (y * env->size_line / 4)] = 0x222222;
+ 	while (++y <= y2)
   	{
-		x = -1;
-		while (x++ < env->width)
-		{
-			if (y < env->height / 2)
-	  			put_pixel_to_img(env, x, y, 0xBDBDBD);
-			else
-				put_pixel_to_img(env, x, y, 0x7e7e7e);
-		}
+		if (env->side_hit == 1)
+			env->img_addr[x + (y * env->size_line / 4)] = 0x8b0000;
+		else
+			env->img_addr[x + (y * env->size_line / 4)] = 0xFF0000;
   	}
+	while (++y < 1190)
+		env->img_addr[x + (y * env->size_line / 4)] = 0xFFFFFFFF;
   return (0);
 }
 
 void	create_image(t_env *env)
 {
-	env->mid_y =  env->height / 2;
+	env->img_h =  env->height;
 	env->img = mlx_new_image(env->mlx, env->width, env->height);
-	env->img_addr = mlx_get_data_addr(env->img,
+	env->img_addr = (int*)mlx_get_data_addr(env->img,
 					&(env->bits_per_pixel), &(env->size_line), &(env->endian));
-	env->floor = mlx_xpm_file_to_image(env->mlx, "./xpm/floor_texture.xpm",
-					&(env->width), &(env->mid_y));
-	env->floor_addr =  mlx_get_data_addr(env->floor, &(env->bits_per_pixel),
-						&(env->size_line), &(env->endian));
+	env->floor = mlx_xpm_file_to_image(env->mlx, "./xpm/floor.xpm",
+					&(env->width), &(env->img_h));
+
+
+
 }
