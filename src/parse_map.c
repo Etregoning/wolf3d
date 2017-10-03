@@ -103,8 +103,8 @@ void	store_map(t_env *env, int fd)
 	while (get_next_line(fd, &(env->map->line)) > 0)
 	{
 		points = ft_strsplit(env->map->line, ' ');
-		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
 		free(env->map->line);
+		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
 		i++;
 	}
 	free(env->map->line);
