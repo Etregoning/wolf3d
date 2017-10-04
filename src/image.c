@@ -49,7 +49,7 @@ int put_line_to_img(t_env *env, int x, int y1, int y2)
 			env->img_addr[x + (y * env->size_line / 4)] = 0xFF0000;
   	}
 	while (++y < 1190)
-		env->img_addr[x + (y * env->size_line / 4)] = 0xFFFFFFFF;
+		env->img_addr[x + (y * env->size_line / 4)] = 0x7e7e7e;
   return (0);
 }
 

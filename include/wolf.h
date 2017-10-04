@@ -48,7 +48,6 @@ typedef struct	s_ray
 	int			draw_start;
 	int			draw_end;
 	int			img_x;
-	int			wall_color;
 }				t_ray;
 
 typedef struct	s_map
@@ -78,8 +77,6 @@ typedef struct	s_env
 	double		old_plane_x;
 	double		plane_x;
 	double		plane_y;
-	double		time;
-	double		prev_time;
 	double		cam_x;
 	double		mov_speed;
 	double		rot_speed;

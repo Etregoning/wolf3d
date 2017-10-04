@@ -40,15 +40,15 @@ void	move_backward(t_env *env)
 	{
 		if(env->map->map_arr[x][y] == 0)
 		{
-			env->pos_x -= env->dir_x * 0.25;
-			env->pos_y -= env->dir_y * 0.25;
+			env->pos_x -= env->dir_x * env->mov_speed;
+			env->pos_y -= env->dir_y * env->mov_speed;
 		}
 	}
 }
 
-void	rotate_right(t_env *env)
+void	rotate_left(t_env *env)
 {
-	if (env->key_pressed->right && !env->key_pressed->left)
+	if (env->key_pressed->left && !env->key_pressed->right)
 	{
 		env->old_dir_x = env->dir_x;
 		env->dir_x = env->dir_x * cos(-(env->rot_speed)) - env->dir_y
@@ -63,9 +63,9 @@ void	rotate_right(t_env *env)
 	}
 }
 
-void	rotate_left(t_env *env)
+void	rotate_right(t_env *env)
 {
-	if (env->key_pressed->left && !env->key_pressed->right)
+	if (env->key_pressed->right && !env->key_pressed->left)
 	{
 		env->old_dir_x = env->dir_x;
       	env->dir_x = env->dir_x * cos(env->rot_speed) - env->dir_y
