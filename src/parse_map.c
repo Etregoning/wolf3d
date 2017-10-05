@@ -66,6 +66,8 @@ void	get_map_width(t_env *env, int fd)
 		{
 			env->map->width = width;
 		}
+		free(points);
+		free(env->map->line);
 	}
 	else
 		ft_error("Error: Empty map");
@@ -85,11 +87,11 @@ void	get_map_height(t_env *env, int fd)
 		width = count_width(env->map->line);
 		if (width != env->map->width)
 			ft_error("Error: Width uneven.");
+		free(points);
+		free(env->map->line);
 		i++;
 	}
 	env->map->height = i;
-	free(env->map->line);
-	free(points);
 	close(fd);
 }
 
@@ -105,9 +107,9 @@ void	store_map(t_env *env, int fd)
 		points = ft_strsplit(env->map->line, ' ');
 		free(env->map->line);
 		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
+		free(points);
 		i++;
 	}
 	free(env->map->line);
-	free(points);
 	close(fd);
 }

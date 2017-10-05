@@ -11,18 +11,17 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
 int		*ft_atoi_2d(char **s, int w)
 {
-	int *map;
+	int *str;
 	int i;
 
 	i = 0;
-	map = (int *)malloc(sizeof(int) * (w + 1));
+	str = (int *)malloc(sizeof(int) * (w + 1));
 	while (i < w)
 	{
-		map[i] = ft_atoi(&s[i][0]);
+		str[i] = ft_atoi(&s[i][0]);
 		i++;
 	}
-	return (map);
+	return (str);
 }
