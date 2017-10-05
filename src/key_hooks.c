@@ -44,6 +44,12 @@ void	toggle_keys(int keycode, t_env *env, int toggle)
 		env->key_pressed->left = toggle;
 	if (keycode == KEY_RIGHT)
 		env->key_pressed->right = toggle;
+	if (keycode == KEY_F)
+		env->key_pressed->f = toggle;
+	if (keycode == KEY_C)
+		env->key_pressed->c = toggle;
+	if (keycode == KEY_SPACE)
+		env->key_pressed->space = toggle;
 }
 
 int	loop_hook(t_env *env)
@@ -59,6 +65,14 @@ int	loop_hook(t_env *env)
 		rotate_right(env);
 	if (env->key_pressed->left)
 		rotate_left(env);
+	if (env->key_pressed->f)
+		floor_toggle(env);
+	if (env->key_pressed->c)
+		wall_toggle(env);
+	if(env->key_pressed->space)
+		space_hook(env);
+	if ((int)env->pos_x == 1 && env->pos_y < 4)
+		close_doors(env);
 	if (env->expose)
 		redraw(env);
 	return (0);

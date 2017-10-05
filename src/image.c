@@ -43,13 +43,15 @@ int put_line_to_img(t_env *env, int x, int y1, int y2)
 		env->img_addr[x + (y * env->size_line / 4)] = 0x222222;
  	while (++y <= y2)
   	{
-		if (env->side_hit == 1)
-			env->img_addr[x + (y * env->size_line / 4)] = 0x8b0000;
-		else
-			env->img_addr[x + (y * env->size_line / 4)] = 0xFF0000;
+		if (env->wall_color_toggle == 0)
+			env->img_addr[x + (y * env->size_line / 4)] = get_wall_color(env);
+		else if (env->wall_color_toggle == 1)
+			env->img_addr[x + (y * env->size_line / 4)] = wall_color_toggled(env);
+		if (env->map->map_arr[env->map_x][env->map_y] == 2)
+			env->img_addr[x + (y * env->size_line / 4)] = 0xffa500;
   	}
-	while (++y < 1190)
-		env->img_addr[x + (y * env->size_line / 4)] = 0x7e7e7e;
+	while (++y < 1200)
+		env->img_addr[x + (y * env->size_line / 4)] = env->floor_color;
   return (0);
 }
 
@@ -61,7 +63,5 @@ void	create_image(t_env *env)
 					&(env->bits_per_pixel), &(env->size_line), &(env->endian));
 	env->floor = mlx_xpm_file_to_image(env->mlx, "./xpm/floor.xpm",
 					&(env->width), &(env->img_h));
-
-
 
 }

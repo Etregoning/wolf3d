@@ -19,6 +19,12 @@ void	redraw(t_env *env)
 	game_loop(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->floor, 0, 600);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	if ((int)env->pos_x == 1 && (int)env->pos_y == 7)
+	{
+		mlx_string_put(env->mlx, env->win, 600, 600, 0x000000, "You win!!");
+		mlx_string_put(env->mlx, env->win, 450, 630, 0x000000,
+						"Press Esc to exit, or space to play again!");
+	}
 	mlx_destroy_image(env->mlx, env->img);
 	mlx_destroy_image(env->mlx, env->floor);
 
@@ -35,12 +41,14 @@ void	environment_init(t_env *env)
 	env->dir_y = 0.0;
 	env->plane_x = 0;
 	env->plane_y = 0.66;
-	env->rot_speed = 0.030;
+	env->rot_speed = 0.040;
 	env->mov_speed = 0.050;
+	env->floor_color = 0x7e7e7e;
 	env->key_pressed->up = 0;
 	env->key_pressed->down = 0;
 	env->key_pressed->left = 0;
 	env->key_pressed->right = 0;
+	env->wall_color_toggle = 0;
 }
 
 void	set_hooks(t_env *env)
@@ -53,9 +61,9 @@ void	set_hooks(t_env *env)
 void	make_environment(void *mlx, t_env *env)
 {
 	if (!(env->ray = (t_ray*)ft_memalloc(sizeof(t_ray))))
-		ft_error("Error: Failed to allocate memory line 48 environment.c");
+		ft_error("Error: Failed to allocate memory line 57 environment.c");
 	if (!(env->key_pressed = (t_keys*)ft_memalloc(sizeof(t_keys))))
-		ft_error("Error: Failed to allocate memory line 50 environment.c");
+		ft_error("Error: Failed to allocate memory line 59 environment.c");
 	env->mlx = mlx;
 	environment_init(env);
 }

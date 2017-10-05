@@ -24,13 +24,19 @@
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_SPACE 49
+# define KEY_F 3
+# define KEY_C 8
 
 typedef	struct		s_keys
 {
+	int				f:1;
+	int				c:1;
 	int				up:1;
 	int				down:1;
 	int				left:1;
 	int				right:1;
+	int				space:1;
 }					t_keys;
 
 typedef struct	s_ray
@@ -65,9 +71,6 @@ typedef struct	s_env
 	void		*win;
 	void		*img;
 	void  		*floor;
-	void 		*ceiling;
-	char		*floor_addr;
-	char		*ceiling_addr;
 	int			*img_addr;
 	double		pos_x;
 	double		pos_y;
@@ -80,6 +83,8 @@ typedef struct	s_env
 	double		cam_x;
 	double		mov_speed;
 	double		rot_speed;
+	unsigned int	floor_color;
+	int			wall_color_toggle;
 	int			img_h;
 	int			expose;
 	int			x;
@@ -129,6 +134,11 @@ void			create_image(t_env *env);
 void			init_thread(t_env *env);
 void			put_pixel_to_img(t_env *env, int x, int y, int color);
 int 			put_line_to_img(t_env *env, int x, int y1, int y2);
-int 			draw_background(t_env *env);
+unsigned int	get_wall_color(t_env *env);
+unsigned int	wall_color_toggled(t_env *env);
+int				floor_toggle(t_env *env);
+int				wall_toggle(t_env *env);
+int				space_hook(t_env *env);
+void			close_doors(t_env *env);
 
 #endif
