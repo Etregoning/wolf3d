@@ -21,11 +21,6 @@ void	move_forward(t_env *env)
 	y = (int)(env->pos_y + env->dir_y * env->mov_speed);
 	if(env->key_pressed->up && !env->key_pressed->down)
 	{
-		if (env->map->map_arr[y * 1][y *1] == 2)
-			{
-				printf("Trying to put string\n");
-				mlx_string_put(env->mlx, env->win, 0, 0, 0xcccccc, "You win!");
-			}
 		if (env->map->map_arr[x][y] == 0)
 		{
 			env->pos_x += env->dir_x * env->mov_speed;
