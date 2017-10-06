@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 14:21:08 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/27 17:13:05 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:56:14 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	calc_ray(t_env *env, int i)
 	env->ray->delta_y = sqrt(1 + (env->ray->dir_x * env->ray->dir_x) /
 						(env->ray->dir_y * env->ray->dir_y));
 	env->hit = 0;
-
 }
 
 void	calc_step(t_env *env)
@@ -55,14 +54,12 @@ void	calc_step(t_env *env)
 		env->ray->side_y = (env->map_y + 1.0 - env->ray->pos_y)
 							* env->ray->delta_y;
 	}
-
 }
 
 void	dda_start(t_env *env)
 {
 	while (env->hit == 0)
 	{
-
 		if (env->ray->side_x < env->ray->side_y)
 		{
 			env->ray->side_x += env->ray->delta_x;
@@ -78,7 +75,6 @@ void	dda_start(t_env *env)
 		if (env->map->map_arr[env->map_x][env->map_y] > 0)
 			env->hit = 1;
 	}
-
 }
 
 void	calc_fov(t_env *env)
@@ -91,10 +87,10 @@ void	calc_fov(t_env *env)
 								(1 - env->step_y) / 2) / env->ray->dir_y;
 	env->ray->line_height = (int)(env->height / env->ray->wall_dist);
 	env->ray->draw_start = -env->ray->line_height / 2 + env->height / 2;
-	if(env->ray->draw_start < 0)
+	if (env->ray->draw_start < 0)
 		env->ray->draw_start = 0;
 	env->ray->draw_end = env->ray->line_height / 2 + env->height / 2;
-	if(env->ray->draw_end >= env->height)
+	if (env->ray->draw_end >= env->height)
 		env->ray->draw_end = env->height - 1;
 }
 
@@ -105,10 +101,10 @@ void	game_loop(t_env *env)
 	x = -1;
 	while (++x < env->width)
 	{
-			calc_ray(env, x);
-			calc_step(env);
-			dda_start(env);
-			calc_fov(env);
-			put_line_to_img(env, x, env->ray->draw_start, env->ray->draw_end);
+		calc_ray(env, x);
+		calc_step(env);
+		dda_start(env);
+		calc_fov(env);
+		put_line_to_img(env, x, env->ray->draw_start, env->ray->draw_end);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:30:27 by etregoni          #+#    #+#             */
-/*   Updated: 2017/10/04 18:30:28 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:54:36 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int	wall_toggle(t_env *env)
+int		wall_toggle(t_env *env)
 {
 	if (env->wall_color_toggle == 0)
 		env->wall_color_toggle = 1;
@@ -22,11 +22,8 @@ int	wall_toggle(t_env *env)
 	return (0);
 }
 
-int	space_hook(t_env *env)
+int		space_hook(t_env *env)
 {
-	int i;
-
-	i = 0;
 	if ((int)env->pos_x == 1 && (int)env->pos_y == 7)
 	{
 		env->map->map_arr[1][5] = 0;

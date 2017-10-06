@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 17:49:07 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/27 17:13:14 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:48:15 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	redraw(t_env *env)
 	}
 	mlx_destroy_image(env->mlx, env->img);
 	mlx_destroy_image(env->mlx, env->floor);
-
 }
 
 void	environment_init(t_env *env)
@@ -61,9 +60,9 @@ void	set_hooks(t_env *env)
 void	make_environment(void *mlx, t_env *env)
 {
 	if (!(env->ray = (t_ray*)ft_memalloc(sizeof(t_ray))))
-		ft_error("Error: Failed to allocate memory line 57 environment.c");
+		ft_error("Error: Failed to allocate memory line 63 environment.c");
 	if (!(env->key_pressed = (t_keys*)ft_memalloc(sizeof(t_keys))))
-		ft_error("Error: Failed to allocate memory line 59 environment.c");
+		ft_error("Error: Failed to allocate memory line 65 environment.c");
 	env->mlx = mlx;
 	environment_init(env);
 }

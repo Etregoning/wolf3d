@@ -6,11 +6,12 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 18:08:42 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/30 18:13:39 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:45:31 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 int		*ft_atoi_2d(char **s, int w)
 {
 	int *str;

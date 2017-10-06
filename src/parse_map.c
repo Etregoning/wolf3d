@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:17:06 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/29 15:17:14 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:01:40 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_line(char *str)
 	}
 }
 
-int	count_width(char *map_coord)
+int		count_width(char *map_coord)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,9 @@ void	get_map_width(t_env *env, int fd)
 {
 	int		width;
 	char	**points;
+	int		j;
 
+	j = 0;
 	if (get_next_line(fd, &(env->map->line)))
 	{
 		points = ft_strsplit(env->map->line, ' ');
@@ -66,6 +68,9 @@ void	get_map_width(t_env *env, int fd)
 		{
 			env->map->width = width;
 		}
+		while (points[j])
+			free(points[j++]);
+		free(points[j]);
 		free(points);
 		free(env->map->line);
 	}
@@ -75,8 +80,9 @@ void	get_map_width(t_env *env, int fd)
 
 void	get_map_height(t_env *env, int fd)
 {
-	int	width;
-	int	i;
+	int		width;
+	int		i;
+	int		j;
 	char	**points;
 
 	i = 1;
@@ -87,6 +93,10 @@ void	get_map_height(t_env *env, int fd)
 		width = count_width(env->map->line);
 		if (width != env->map->width)
 			ft_error("Error: Width uneven.");
+		j = 0;
+		while (points[j])
+			free(points[j++]);
+		free(points[j]);
 		free(points);
 		free(env->map->line);
 		i++;
@@ -98,6 +108,7 @@ void	get_map_height(t_env *env, int fd)
 void	store_map(t_env *env, int fd)
 {
 	int		i;
+	int		j;
 	char	**points;
 
 	i = 0;
@@ -107,6 +118,10 @@ void	store_map(t_env *env, int fd)
 		points = ft_strsplit(env->map->line, ' ');
 		free(env->map->line);
 		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
+		j = 0;
+		while (points[j])
+			free(points[j++]);
+		free(points[j]);
 		free(points);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:52:47 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/27 18:52:50 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:53:45 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	toggle_keys(int keycode, t_env *env, int toggle)
 		env->key_pressed->space = toggle;
 }
 
-int	loop_hook(t_env *env)
+int		loop_hook(t_env *env)
 {
 	if (env->key_pressed->up || env->key_pressed->down ||
 		env->key_pressed->left || env->key_pressed->right)
@@ -69,7 +69,7 @@ int	loop_hook(t_env *env)
 		floor_toggle(env);
 	if (env->key_pressed->c)
 		wall_toggle(env);
-	if(env->key_pressed->space)
+	if (env->key_pressed->space)
 		space_hook(env);
 	if ((int)env->pos_x == 1 && env->pos_y < 4)
 		close_doors(env);
