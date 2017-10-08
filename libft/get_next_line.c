@@ -5,75 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/21 13:12:39 by etregoni          #+#    #+#             */
-/*   Updated: 2017/04/21 13:12:39 by etregoni         ###   ########.fr       */
+/*   Created: 2017/10/07 15:33:03 by etregoni          #+#    #+#             */
+/*   Updated: 2017/10/07 17:15:43 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		read_file(char **str, int fd)
+static int	read_it(const int fd, char **holder, t_gnl *gnl)
 {
-	int		ret;
-	char	*s;
-	char	buf[BUFF_SIZE + 1];
+	char			buff[BUFF_SIZE + 1];
+	char			*tmp;
 
-	if ((ret = read(fd, buf, BUFF_SIZE)) == -1)
-		return (-1);
-	buf[ret] = '\0';
-	s = *str;
-	*str = ft_strjoin(*str, buf);
-	if (*s != 0)
-		free(s);
-	return (ret);
-}
-
-static int		get_line(char **str, char **line, char *s)
-{
-	int		i;
-	char	*new_str;
-
-	i = 0;
-	if (*s == '\n')
-		i = 1;
-	*s = 0;
-	*line = ft_strjoin("", *str);
-	if (i == 0 && ft_strlen(*str) != 0)
+	if ((gnl->counter = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		*str = ft_strnew(1);
-		return (1);
-	}
-	else if (i == 0 && !(ft_strlen(*str)))
-		return (0);
-	new_str = *str;
-	*str = ft_strjoin(s + 1, "");
-	free(new_str);
-	return (i);
-}
-
-int				get_next_line(int const fd, char **line)
-{
-	int			ret;
-	char		*s;
-	static char	*str;
-
-	if (str == 0)
-		str = "";
-	if (!line || BUFF_SIZE < 1)
-		return (-1);
-	ret = BUFF_SIZE;
-	while (line)
-	{
-		s = str;
-		while (*s || ret < BUFF_SIZE)
+		buff[gnl->counter] = 0;
+		if (*holder)
 		{
-			if (*s == '\n' || *s == 0 || *s == -1)
-				return (get_line(&str, line, s));
-			s++;
+			tmp = ft_strdup(*holder);
+			ft_strdel(&(*holder));
+			*holder = ft_strjoin(tmp, buff);
+			ft_strdel(&tmp);
 		}
-		ret = read_file(&str, fd);
-		if (ret == -1)
-			return (-1);
+		else
+			*holder = ft_strdup(buff);
 	}
-	return (0);
+	if (gnl->counter == 0)
+		ft_strdel(&(*holder));
+	return (gnl->counter);
+}
+
+static void	get_it(char **buff, t_gnl *gnl)
+{
+	gnl->next = ft_strdup(gnl->end + 1);
+	ft_strdel(&(*buff));
+	*buff = ft_strdup(gnl->next);
+	ft_strdel(&(gnl->next));
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static char		*buff[FD_COUNT];
+	t_gnl			gnl;
+
+	if (fd < 0 || fd > FD_COUNT || line == NULL)
+		return (-1);
+	//if (!(buff[fd]))
+	//	buff[fd][0] = 0;
+	while ((gnl.counter = read_it(fd, &buff[fd], &gnl)) >= 0)
+	{
+		if (gnl.counter != 0 && (gnl.end = ft_strchr(buff[fd], ENDCHAR)) != NULL)
+			break ;
+		if (gnl.counter == 0)
+		{
+			if (!buff[fd])
+				return (0);
+			*line = ft_strdup(buff[fd]);
+			ft_strdel(&buff[fd]);
+			return (1);
+		}
+	}
+	if (gnl.counter < 0)
+		return (-1);
+	*line = ft_strsub(buff[fd], 0, (gnl.end - buff[fd]));
+	get_it(&buff[fd], &gnl);
+	return (1);
 }

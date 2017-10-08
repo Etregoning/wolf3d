@@ -6,7 +6,7 @@
 #    By: etregoni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/21 14:58:27 by etregoni          #+#    #+#              #
-#    Updated: 2017/10/04 13:40:12 by etregoni         ###   ########.fr        #
+#    Updated: 2017/10/07 18:45:14 by etregoni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ NAME = wolf3d
 CFLAGS = -Wall -Werror -Wextra -g
 
 SRC_FILES = environment.c game_loop.c image.c key_hooks.c main.c \
-			movement.c parse_map.c colors.c key_hooks2.c
-
+			movement.c parse_map.c colors.c key_hooks2.c kane_alloc_wrap.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 SRC_DIR = ./src/

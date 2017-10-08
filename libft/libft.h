@@ -6,7 +6,7 @@
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 14:21:37 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/30 18:12:57 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/07 16:07:58 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFF_SIZE 32
+# define FD_COUNT 1024 
+# define ENDCHAR '\n'
+
+typedef struct      s_gnl
+{
+    char            *next;
+    char            *end;
+    int             counter;
+}                   t_gnl;
 
 typedef struct	s_list
 {

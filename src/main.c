@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 19:13:35 by etregoni          #+#    #+#             */
-/*   Updated: 2017/09/27 17:01:26 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/07 18:39:38 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ int	main(int ac, char **av)
 	set_hooks(env);
 	mlx_loop_hook(mlx, loop_hook, env);
 	mlx_loop(mlx);
+	return (0);
 }
