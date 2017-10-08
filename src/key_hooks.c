@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:52:47 by etregoni          #+#    #+#             */
-/*   Updated: 2017/10/07 19:01:19 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/07 19:32:52 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,25 @@ int		exit_hook(t_env *env)
 	int i;
 
 	i = 0;
+	printf("****%s\n", env->map->line);
 	mlx_destroy_window(env->mlx, env->win);
+	printf("start\n");
 	free(env->ray);
+	printf("ray\n");
 	free(env->key_pressed);
-	while (env->map->map_arr[i] != '\0')
+	printf("key pressed\n");
+	while (i < 50)
 	{
 		free(env->map->map_arr[i]);
+		printf("%d\n", i);
 		i++;
 	}
-	//free(env->map->map_arr);
+	free(env->map->map_arr);
+	printf("loop finished\n");
 	free(env->map);
+	printf("map\n");
 	free(env);
+	printf("env\n");
 	exit(0);
 	return (0);
 }

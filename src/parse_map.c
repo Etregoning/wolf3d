@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:17:06 by etregoni          #+#    #+#             */
-/*   Updated: 2017/10/07 18:39:15 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/07 19:31:02 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	get_map_height(t_env *env, int fd)
 	char	**points;
 
 	i = 1;
-	while (get_next_line(fd, &(env->map->line)))
+	while (get_next_line(fd, &(env->map->line)) > 0)
 	{
 		points = ft_strsplit(env->map->line, ' ');
 		check_line(env->map->line);

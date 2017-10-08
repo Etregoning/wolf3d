@@ -6,7 +6,7 @@
 /*   By: etregoni <etregoni@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 15:57:47 by etregoni          #+#    #+#             */
-/*   Updated: 2017/10/07 18:34:16 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/10/07 19:11:22 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,6 @@ typedef struct		s_env
 	t_ray			*ray;
 	t_map			*map;
 }					t_env;
-
-typedef struct		s_thread
-{
-	t_env			*env;
-	int				count;
-	int				index;
-	int				x;
-	int				y;
-}					t_thread;
 
 void				get_map_width(t_env *env, int fd);
 void				get_map_height(t_env *env, int fd);
