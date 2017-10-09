@@ -17,25 +17,18 @@ int		exit_hook(t_env *env)
 	int i;
 
 	i = 0;
-	printf("****%s\n", env->map->line);
 	mlx_destroy_window(env->mlx, env->win);
-	printf("start\n");
 	free(env->ray);
-	printf("ray\n");
 	free(env->key_pressed);
-	printf("key pressed\n");
 	while (i < 50)
 	{
 		free(env->map->map_arr[i]);
-		printf("%d\n", i);
 		i++;
 	}
 	free(env->map->map_arr);
-	printf("loop finished\n");
 	free(env->map);
-	printf("map\n");
+	free(env->img);
 	free(env);
-	printf("env\n");
 	exit(0);
 	return (0);
 }

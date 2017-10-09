@@ -14,7 +14,7 @@ NAME = wolf3d
 CFLAGS = -Wall -Werror -Wextra -g
 
 SRC_FILES = environment.c game_loop.c image.c key_hooks.c main.c \
-			movement.c parse_map.c colors.c key_hooks2.c kane_alloc_wrap.c
+			movement.c parse_map.c colors.c key_hooks2.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 SRC_DIR = ./src/
