@@ -56,7 +56,7 @@ void	get_map_width(t_env *env, int fd)
 	char	**points;
 	int		j;
 
-	j = -1;
+	j = 0;
 	if (get_next_line(fd, &(env->map->line)))
 	{
 		points = ft_strsplit(env->map->line, ' ');
@@ -69,8 +69,8 @@ void	get_map_width(t_env *env, int fd)
 		{
 			env->map->width = width;
 		}
-		while (points[++j])
-			free(points[j]);
+		while (points[j])
+			free(points[j++]);
 		free(points);
 	}
 	else
@@ -93,9 +93,9 @@ void	get_map_height(t_env *env, int fd)
 		free(env->map->line);
 		if (width != env->map->width)
 			ft_error("Error: Width uneven.");
-		j = -1;
-		while (points[++j])
-			free(points[j]);
+		j = 0;
+		while (points[j])
+			free(points[j++]);
 		free(points);
 		i++;
 	}
@@ -118,10 +118,7 @@ void	store_map(t_env *env, int fd)
 		env->map->map_arr[i] = ft_atoi_2d(points, env->map->width);
 		j = 0;
 		while (points[j])
-		{
-			free(points[j]);
-			j++;
-		}
+			free(points[j++]);
 		free(points);
 		i++;
 	}
