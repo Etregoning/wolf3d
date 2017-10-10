@@ -55,8 +55,8 @@ void	get_map_width(t_env *env, int fd)
 	int		width;
 	char	**points;
 	int		j;
-	
-	j = 0;
+
+	j = -1;
 	if (get_next_line(fd, &(env->map->line)))
 	{
 		points = ft_strsplit(env->map->line, ' ');
@@ -69,11 +69,8 @@ void	get_map_width(t_env *env, int fd)
 		{
 			env->map->width = width;
 		}
-		while (points[j])
-		{
+		while (points[++j])
 			free(points[j]);
-			j++;
-		}
 		free(points);
 	}
 	else
@@ -96,12 +93,9 @@ void	get_map_height(t_env *env, int fd)
 		free(env->map->line);
 		if (width != env->map->width)
 			ft_error("Error: Width uneven.");
-		j = 0;
-		while (points[j])
-		{
+		j = -1;
+		while (points[++j])
 			free(points[j]);
-			j++;
-		}
 		free(points);
 		i++;
 	}

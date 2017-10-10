@@ -50,11 +50,10 @@ int			get_next_line(const int fd, char **line)
 
 	if (fd < 0 || fd > FD_COUNT || line == NULL)
 		return (-1);
-	//if (!(buff[fd]))
-	//	buff[fd][0] = 0;
 	while ((gnl.counter = read_it(fd, &buff[fd], &gnl)) >= 0)
 	{
-		if (gnl.counter != 0 && (gnl.end = ft_strchr(buff[fd], ENDCHAR)) != NULL)
+		if (gnl.counter != 0 && (gnl.end = ft_strchr(buff[fd], ENDCHAR))
+				!= NULL)
 			break ;
 		if (gnl.counter == 0)
 		{

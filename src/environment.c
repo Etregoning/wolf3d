@@ -15,6 +15,8 @@
 void	redraw(t_env *env)
 {
 	env->expose = 0;
+	mlx_destroy_image(env->mlx, env->img);
+	mlx_destroy_image(env->mlx, env->floor);
 	create_image(env);
 	game_loop(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->floor, 0, 600);
@@ -25,8 +27,6 @@ void	redraw(t_env *env)
 		mlx_string_put(env->mlx, env->win, 450, 630, 0x000000,
 						"Press Esc to exit, or space to play again!");
 	}
-	mlx_destroy_image(env->mlx, env->img);
-	mlx_destroy_image(env->mlx, env->floor);
 }
 
 void	environment_init(t_env *env)

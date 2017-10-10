@@ -27,16 +27,3 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	*buffer = '\0';
 	return (buffer2);
 }
-
-/*
-char	*ft_strsub(const char *s, unsigned int start, size_t len)
-{
-	char	*sub;
-
-	sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub || !s)
-		return (NULL);
-	ft_memcpy(sub, &s[start], len);
-	sub[len] = '\0';
-	return (sub);
-}*/
