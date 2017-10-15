@@ -20,11 +20,8 @@ int		exit_hook(t_env *env)
 	mlx_destroy_window(env->mlx, env->win);
 	free(env->ray);
 	free(env->key_pressed);
-	while (i < 50)
-	{
-		free(env->map->map_arr[i]);
-		i++;
-	}
+	while (i < env->map->width)
+		free(env->map->map_arr[i++]);
 	free(env->map->map_arr);
 	free(env->map);
 	free(env->img);
